@@ -15,7 +15,9 @@ This IntelliJ Platform Plugin provides integration between Gherkin feature files
 Key features:
 - Provide Run Line Marker to A Gherkin feature file
 - Run the marker as Go test
+- Run Go tests with test case specifiers derived from Scenario titles
 - Display test output in the Run window like standard Go test commands
+- Clickable Scenario and Feature title from Godog console output back to the feature file
 
 This plugin is useful for BDD (Behavior-Driven Development) workflows where Gherkin is used to define test scenarios and Go is used to implement the tests.
 
@@ -26,58 +28,12 @@ To keep everything working, do not remove `<!-- ... -->` sections.
 
 ## Usage
 
-### Creating Gherkin Feature Files
+### Godog integration 
 
-1. Create a new file with a `.feature` extension
-2. Write your feature file using Gherkin syntax:
+The tools were mainly used to integrate with Godog output. See [Godog](https://github.com/cucumber/godog) for more info.
 
-```gherkin
-Feature: Sample feature for testing
-
-  Scenario: Add two numbers
-    Given I have entered 50 into the calculator
-    And I have entered 70 into the calculator
-    When I press add
-    Then the result should be 120 on the screen
-
-  Scenario: Subtract two numbers
-    Given I have entered 70 into the calculator
-    And I have entered 50 into the calculator
-    When I press subtract
-    Then the result should be 20 on the screen
-```
-
-### Creating Go Test Files
-
-Create Go test files that correspond to your Gherkin scenarios. The test function names should be derived from the scenario titles:
-
-```go
-package calculator
-
-import (
-	"testing"
-)
-
-// TestAddTwoNumbers is a test function that corresponds to the "Add two numbers" scenario
-func TestAddTwoNumbers(t *testing.T) {
-	// Implement the steps from the scenario
-	result := 50 + 70
-	if result != 120 {
-		t.Errorf("Expected 120, got %d", result)
-	}
-}
-
-// TestSubtractTwoNumbers is a test function that corresponds to the "Subtract two numbers" scenario
-func TestSubtractTwoNumbers(t *testing.T) {
-	// Implement the steps from the scenario
-	result := 70 - 50
-	if result != 20 {
-		t.Errorf("Expected 20, got %d", result)
-	}
-}
-```
-
-### Running Tests
+Test data is included in [testData](./src/test/testData) directory.
+Open it using Goland or other intellij IDE with Go plugin enabled.
 
 1. Open a Gherkin feature file in the editor
 2. You'll see a "Run" button next to each Scenario
