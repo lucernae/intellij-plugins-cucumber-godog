@@ -1,0 +1,22 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.github.lucernae.intellijplugins.cucumbergodog</id>
+    <name>Gherkin Go Test Runner</name>
+    <vendor>lucernae</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.go</depends>
+    <depends>gherkin</depends>
+
+    <resource-bundle>messages.MyBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow factoryClass="com.github.lucernae.intellijplugins.cucumbergodog.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <postStartupActivity implementation="com.github.lucernae.intellijplugins.cucumbergodog.startup.MyProjectActivity" />
+
+        <!-- Run line markers for Gherkin scenarios -->
+        <runLineMarkerContributor language="Gherkin" implementationClass="com.github.lucernae.intellijplugins.cucumbergodog.gherkin.GherkinRunLineMarkerProvider"/>
+        <configurationType implementation="com.github.lucernae.intellijplugins.cucumbergodog.gherkin.GodogTestConfigurationType" />
+        <consoleFilterProvider implementation="com.github.lucernae.intellijplugins.cucumbergodog.filters.GodogTestConsoleFilterProvider"/>
+    </extensions>
+</idea-plugin>
